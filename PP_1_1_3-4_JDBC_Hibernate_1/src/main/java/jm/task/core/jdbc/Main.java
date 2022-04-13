@@ -1,6 +1,7 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.util.Util;
 
@@ -8,20 +9,20 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Util.getConnection();
+        Util.getSessionFactory();
 
-        UserDao userDao = new UserDaoJDBCImpl();
+        UserDaoHibernateImpl userDaoHibernate= new UserDaoHibernateImpl();
 
-        userDao.createUsersTable();
+        userDaoHibernate.createUsersTable();
 
-        userDao.saveUser("Ivan", "Petrow", (byte) 17);
-        userDao.saveUser("Pavel", "Pavlov", (byte) 17);
-        userDao.saveUser("Andrey", "Andreev", (byte) 17);
-        userDao.saveUser("Vasiliy", "Vasiliev", (byte) 17);
+        userDaoHibernate.saveUser("Ivan", "Petrow", (byte) 17);
+        userDaoHibernate.saveUser("Pavel", "Pavlov", (byte) 17);
+        userDaoHibernate.saveUser("Andrey", "Andreev", (byte) 17);
+        userDaoHibernate.saveUser("Vasiliy", "Vasiliev", (byte) 17);
 
-        userDao.getAllUsers();
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
+        userDaoHibernate.getAllUsers();
+        userDaoHibernate.cleanUsersTable();
+        userDaoHibernate.dropUsersTable();
 
     }
 }
